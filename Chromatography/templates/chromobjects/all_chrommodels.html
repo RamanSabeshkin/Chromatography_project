@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All Chromatographic Models
+{% endblock %}
+
+{% block body %}
+    {% for chrommodel in chrommodels %}
+        <h3>{{ chrommodel.slug }}</h3>
+        <p>
+            {{ chrommodel.column}}
+        </p>
+        <p>
+            {{ chrommodel.eluent}}
+        </p>
+
+        <a href="{{ chrommodel.get_absolute_url }}">go to Chromatographic model </a><br>
+        <hr>
+    {% endfor %}
+{% endblock %}
+

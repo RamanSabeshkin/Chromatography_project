@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Chromatographic models
+{% endblock %}
+
+{% block body %}
+
+    <h1>Chromatographic model: {{ chrommodel.slug }}</h1>
+    <p>Chromatographic column: {{ chrommodel.column}}</p>
+    <p>Eluent:{{ chrommodel.eluent}}</p>
+    <p>Temperature of column: {{ chrommodel.temperature}}</p>
+    <p>Flow rate (ml/min): {{ chrommodel.flow_rate}}</p>
+    <p>Injected volume (µl): {{ chrommodel.injected_volume}}</p>
+    <p>Coefficient k1: {{ chrommodel.k1}}</p>
+    <p>Coefficient k2: {{ chrommodel.k2}}</p>
+    <a href="{% url "chromatography:all_chrommodels" %}"> Back to all Chromatographic models </a>
+{% endblock %}
