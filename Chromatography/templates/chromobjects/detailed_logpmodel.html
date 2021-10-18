@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   {{logpmodel.slug}}
+{% endblock %}
+
+{% block body %}
+
+    <p>Chromatographic column: {{ logpmodel.column}}</p>
+    <p>Eluent: {{ logpmodel.eluent}}</p>
+    <p>Gradient time (min): {{ logpmodel.gradient_time}}</p>
+    <p>Gradient of eluent (%): {{ logpmodel.gradient_of_eluent}}</p>
+    <p>Temperature of column (°C): {{ logpmodel.temperature}}</p>
+    <p>Flow rate (ml/min): {{ logpmodel.flow_rate}}</p>
+    <p>Injected volume (µl): {{ logpmodel.injected_volume}}</p>
+    <p>Coefficient k1: {{ logpmodel.k1}}</p>
+    <p>Coefficient k2: {{ logpmodel.k2}}</p>
+
+    <h3>Calculate retention time (min):</h3>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Calculate!">
+        </form>
+
+
+    <a href="{% url "chromatography:all_logpmodels" %}"> Back to all Chromatographic models </a>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All Chromatographic Models
+{% endblock %}
+
+{% block body %}
+    {% for logpmodel in logpmodels %}
+        <h3>{{ logpmodel.slug }}</h3>
+        <p>
+            {{ logpmodel.column}}
+        </p>
+        <p>
+            {{ logpmodel.eluent}}
+        </p>
+         <p>
+            tg = {{ logpmodel.gradient_time}} min
+        </p>
+
+        <a href="{{ logpmodel.get_absolute_url }}">go to Chromatographic model </a><br>
+        <hr>
+    {% endfor %}
+{% endblock %}
+
