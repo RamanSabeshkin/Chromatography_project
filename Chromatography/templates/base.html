@@ -6,7 +6,12 @@
     <title>{% block title %}MY DEFAULT TITLE{% endblock %}</title>
     <link href="{% static "style.css" %}" rel="stylesheet">
 </head>
-<body>
+<header>
+    {% if request.user.is_authenticated %}
+            <a href="{% url "chromatography:logout" %}">logout </a>
+    {% else %}
+            <a href="{% url "chromatography:login" %}">login </a><br>
+    {% endif %}
+</header>
 {% block body %}{% endblock %}
-</body>
 </html>

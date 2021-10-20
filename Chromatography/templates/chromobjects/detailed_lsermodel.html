@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   {{lsermodel.slug}}
+{% endblock %}
+
+{% block body %}
+    <h3>LSER Model</h3>
+    <p>Chromatographic column: {{ lsermodel.column}}</p>
+    <p>Eluent: {{ lsermodel.eluent}}</p>
+    <p>Gradient time (min): {{ lserpmodel.gradient_time}}</p>
+    <p>Gradient of eluent (%): {{ lserpmodel.gradient_of_eluent}}</p>
+    <p>Temperature of column (°C): {{ lserpmodel.temperature}}</p>
+    <p>Flow rate (ml/min): {{ lserpmodel.flow_rate}}</p>
+    <p>Injected volume (µl): {{ lsermodel.injected_volume}}</p>
+    <p>Coefficient k1: {{ lsermodel.k1}}</p>
+    <p>Coefficient k2: {{ lsermodel.k2}}</p>
+    <p>Coefficient k3: {{ lsermodel.k3}}</p>
+    <p>Coefficient k4: {{ lsermodel.k4}}</p>
+
+    <h3>Calculate retention time (min):</h3>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Calculate!">
+        </form>
+
+
+    <a href="{% url "chromatography:all_models" %}"> Back to all Chromatographic models </a>
+{% endblock %}

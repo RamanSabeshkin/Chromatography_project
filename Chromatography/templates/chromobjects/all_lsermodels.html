@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All LSER Chromatographic Models
+{% endblock %}
+
+{% block body %}
+    <h3>All LSER Chromatographic models</h3>
+    {% for lserpmodel in lserpmodels %}
+        <h3>{{ lserpmodel.slug }}</h3>
+        <p>
+            {{ lserpmodel.column}}
+        </p>
+        <p>
+            {{ lserpmodel.eluent}}
+        </p>
+         <p>
+            tg (gradient time) = {{ lserpmodel.gradient_time}} min
+        </p>
+
+        <a href="{{ lsermodel.get_absolute_url }}">go to Chromatographic model </a><br>
+        <hr>
+    {% endfor %}
+{% endblock %}

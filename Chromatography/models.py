@@ -3,21 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 
-
-"""class Eluent(models.Model):
-    name = models.CharField(max_length=100, verbose_name="1-st solvent, 2-nd solvent", unique=True)
-    description = models.TextField(max_length=255, blank=True)
-    slug = models.SlugField(max_length=100, unique_for_date='publish')
-
-    publish = models.DateTimeField(default=timezone.now)
-
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE,
-                               related_name='user_eluent')
-
-    def __str__(self):
-        return self.slug"""
+from django.conf import settings
 
 
 class Column(models.Model):
@@ -27,7 +13,7 @@ class Column(models.Model):
     ]
     type = models.CharField(max_length=20, choices=COLUMN_TYPE, default='C18', )
     name = models.CharField(max_length=100, unique=True)
-    abbreviation = models.CharField(max_length=20, unique=True, blank=True)
+    abbreviation = models.CharField(max_length=20, blank=True)
     manufacturer = models.CharField(max_length=100)
     dimensions = models.CharField(max_length=50, blank=True, verbose_name="Dimensions, L×i.d.(mm×mm)")
     particle_size = models.DecimalField(blank=True,
@@ -65,7 +51,7 @@ class Column(models.Model):
 
 
 class LogPModel(models.Model):
-    column = models.ForeignKey(Column, on_delete=models.CASCADE, to_field='name')
+    column = models.ForeignKey(Column, to_field='name', on_delete=models.CASCADE)
     eluent = models.CharField(max_length=255, verbose_name="Eluent (Solvent1 Solvent2)")
     gradient_of_eluent = models.CharField(max_length=255, verbose_name="Gradient of eluent (%)", blank=True)
     description = models.TextField(max_length=1000, blank=True)
@@ -89,6 +75,39 @@ class LogPModel(models.Model):
 
     def get_absolute_url(self):
         return reverse('chromatography:detailed_logpmodel',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
+
+
+class LSERModel(models.Model):
+    column = models.ForeignKey(Column, to_field='name', on_delete=models.CASCADE)
+    eluent = models.CharField(max_length=255, verbose_name="Eluent (Solvent1 Solvent2)")
+    gradient_of_eluent = models.CharField(max_length=255, verbose_name="Gradient of eluent (%)", blank=True)
+    description = models.TextField(max_length=1000, blank=True)
+    gradient_time = models.CharField(max_length=255, verbose_name="tg (min)")
+    temperature = models.DecimalField(max_digits=4, decimal_places=1, verbose_name="Temperature of column (°C)", )
+    flow_rate = models.DecimalField(max_digits=3, decimal_places=1, verbose_name="Flow rate (ml/min)", )
+    injected_volume = models.DecimalField(max_digits=3, decimal_places=1,
+                                          verbose_name="Injected volume (µl)", blank=True, )
+    k1 = models.DecimalField(max_digits=7, decimal_places=4, )
+    k2 = models.DecimalField(max_digits=7, decimal_places=4, )
+    k3 = models.DecimalField(max_digits=7, decimal_places=4, )
+    k4 = models.DecimalField(max_digits=7, decimal_places=4, )
+
+    slug = models.SlugField(max_length=100, unique_for_date='publish')
+    publish = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='user_lserModel', )
+
+    def __str__(self):
+        return self.slug
+
+    def get_absolute_url(self):
+        return reverse('chromatography:detailed_lsermodel',
                        args=[self.publish.year,
                              self.publish.month,
                              self.publish.day,
