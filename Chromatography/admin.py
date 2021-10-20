@@ -28,3 +28,7 @@ class LserModelAdmin(admin.ModelAdmin):
     ordering = ('column', 'eluent', 'gradient_time')
     prepopulated_fields = {'slug': ('column', 'eluent', 'gradient_time')}
 
+
+@admin.register(models.Profile)
+class ProfileModelAdmin(admin.ModelAdmin):
+    list_display = ('user', 'first_name', 'last_name', 'created')

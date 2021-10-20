@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.http import HttpResponse
 from decimal import *
 from . import models
 from . import forms
+import pubchempy as pcp
 
 
 
@@ -97,3 +99,23 @@ def detailed_lsermodel(request, y, m, d, slug):
                   'chromobjects/detailed_lsermodel.html',
                   {'form': form, 'lsermodel': lsermodel}, )
 
+
+def profile(request):
+    return render(request, "registration/profile.html", {'user': request.user})
+
+
+def register(request):
+    if request.method == "POST":
+        form = forms.UserRegistrationForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            new_user = form.save(commit=False)
+            new_user.set_password(cd['password'])
+            new_user.save()
+            models.Profile.objects.create(user=new_user)
+            return render(request, "registration/registration_complete.html",
+                          {"user": new_user})
+
+    else:
+        form = forms.UserRegistrationForm()
+    return render(request, "registration/register.html", {'form': form})

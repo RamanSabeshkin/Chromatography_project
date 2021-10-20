@@ -10,35 +10,39 @@
     <h3>All LogP Chromatographic models</h3>
 
     {% for logpmodel in logpmodels %}
-        <h3>{{ logpmodel.slug }}</h3>
-        <p>
-            {{ logpmodel.column}}
-        </p>
-        <p>
-            {{ logpmodel.eluent}}
-        </p>
-         <p>
-            tg (gradient time) = {{ logpmodel.gradient_time}} min
-        </p>
+        <div>
+            <h3>{{ logpmodel.slug }}</h3>
+            <p>
+                {{ logpmodel.column}}
+            </p>
+            <p>
+                {{ logpmodel.eluent}}
+            </p>
+             <p>
+                tg (gradient time) = {{ logpmodel.gradient_time}} min
+            </p>
 
-        <a href="{{ logpmodel.get_absolute_url }}">go to Chromatographic model </a><br>
-        <hr>
+            <a href="{{ logpmodel.get_absolute_url }}">go to Chromatographic model </a><br>
+            <hr>
+        </div>
     {% endfor %}
 
     <h3>All LSER Chromatographic models</h3>
     {% for lsermodel in lsermodels %}
-        <h3>{{ lsermodel.slug }}</h3>
-        <p>
-            {{ lsermodel.column}}
-        </p>
-        <p>
-            {{ lsermodel.eluent}}
-        </p>
-         <p>
-            tg (gradient time) = {{ lsermodel.gradient_time}} min
-        </p>
+        <div>
+            <h3>{{ lsermodel.slug }}</h3>
+            <p>
+                {{ lsermodel.column}}
+            </p>
+            <p>
+                {{ lsermodel.eluent}}
+            </p>
+             <p>
+                tg (gradient time) = {{ lsermodel.gradient_time}} min
+            </p>
 
-        <a href="{{ lsermodel.get_absolute_url }}">go to Chromatographic model </a><br>
+            <a href="{{ lsermodel.get_absolute_url }}">go to Chromatographic model </a><br>
+        </div>
         <hr>
     {% endfor %}
 {% endblock %}
