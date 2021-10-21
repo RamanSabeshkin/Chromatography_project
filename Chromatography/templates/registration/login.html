@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
     Login page
 {% endblock %}
@@ -15,4 +16,11 @@
             <input type="submit" value="Login">
         </form>
     {% endif %}
+
+    <p><strong> --Or sign in -- </strong></p>
+
+    <a href="{% url 'social:begin' 'github' %}" >Sign in with GitHub</a> <br>
+
+    <a href="{% url 'social:begin' 'google-oauth2' %}" >Sign in with Google</a> <br>
+
 {% endblock %}

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 ROOT_URLCONF = 'Chromatography_web.urls'
 
@@ -64,6 +72,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Add the following two
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -126,11 +138,18 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/Chromatography/login/'
-LOGIN_REDIRECT_URL = '/Chromatography/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_URL = '/Chromatography/logout/'
-LOGOUT_REDIRECT_URL = '/Chromatography/'
+LOGOUT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# social auth configs for github
+SOCIAL_AUTH_GITHUB_KEY = 'b184b62380ce1fe8a870'
+SOCIAL_AUTH_GITHUB_SECRET = '0e6add0e6ca20224c86dbd5b5ec8b9bd694ac774'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '820771291958-bmu3mhbnbc5e5adog2cf0j6ves76d1pm.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
