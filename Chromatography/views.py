@@ -26,6 +26,12 @@ def all_logpmodels(request):
                   {'logpmodels': logpmodels})
 
 
+def all_lserpmodels(request):
+    lsermodels = models.LogPModel.objects.all()
+    return render(request, "chromobjects/all_lsermodels.html",
+                  {'lsermodels': lsermodels})
+
+
 @login_required
 def detailed_logpmodel(request, y, m, d, slug):
     logpmodel = get_object_or_404(models.LogPModel,
@@ -64,7 +70,7 @@ def detailed_logpmodel(request, y, m, d, slug):
 def all_lsermodels(request):
     lsermodels = models.LSERModel.objects.all()
     return render(request, "chromobjects/all_lsermodels.html",
-                  {'lserpmodels': lsermodels})
+                  {'lsermodels': lsermodels})
 
 
 @login_required
@@ -165,3 +171,49 @@ def create_column(request):
     return render(request,
                   'columns_and_models/create_column.html',
                   {'form': column_form})
+
+
+def create_logp_model(request):
+    if request.method == "POST":
+        logp_model_form = forms.LogPModelForm(request.POST)
+        if logp_model_form.is_valid():
+            new_logp_model = logp_model_form.save(commit=False)
+            new_logp_model.author = User.objects.first()
+            new_logp_model.slug = str(new_logp_model.column.name.replace(" ", "-")) + "-" \
+                                  + str(new_logp_model.eluent.replace(" ", "-")) \
+                                  + str(new_logp_model.gradient_time)
+
+            new_logp_model.save()
+
+            return render(request, "chromobjects/detailed_logpmodel.html",
+                          {"logp_model": new_logp_model})
+
+    else:
+        logp_model_form = forms.LogPModelForm()
+
+    return render(request,
+                  'columns_and_models/create_logpmodel.html',
+                  {'form': logp_model_form})
+
+
+def create_lser_model(request):
+    if request.method == "POST":
+        lser_model_form = forms.LserModelForm(request.POST)
+        if lser_model_form.is_valid():
+            new_lser_model = lser_model_form.save(commit=False)
+            new_lser_model.author = User.objects.first()
+            new_lser_model.slug = str(new_lser_model.column.name.replace(" ", "-")) + "-" \
+                                  + str(new_lser_model.eluent.replace(" ", "-")) \
+                                  + str(new_lser_model.gradient_time)
+
+            new_lser_model.save()
+
+            return render(request, "chromobjects/detailed_lsermodel.html",
+                          {"logp_model": new_lser_model})
+
+    else:
+        lser_model_form = forms.LserModelForm()
+
+    return render(request,
+                  'columns_and_models/create_lsermodel.html',
+                  {'form': lser_model_form})

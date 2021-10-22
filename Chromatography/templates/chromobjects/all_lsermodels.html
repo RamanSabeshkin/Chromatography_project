@@ -6,13 +6,13 @@
 
 {% block body %}
     <h3>All LSER Chromatographic models</h3>
-    {% for lserpmodel in lserpmodels %}
-        <h3>{{ lserpmodel.slug }}</h3>
+    {% for lsermodel in lsermodels %}
+        <h3>{{ lsermodel.slug }}</h3>
         <p>
-            {{ lserpmodel.column}}
+            {{ lsermodel.column}}
         </p>
         <p>
-            {{ lserpmodel.eluent}}
+            {{ lsermodel.eluent}}
         </p>
          <p>
             tg (gradient time) = {{ lserpmodel.gradient_time}} min
@@ -21,4 +21,5 @@
         <a href="{{ lsermodel.get_absolute_url }}">go to Chromatographic model </a><br>
         <hr>
     {% endfor %}
+    <a href="{% url "chromatography:create_lsermodel" %}"> Create new LSER Model </a>
 {% endblock %}

@@ -53,6 +53,33 @@ class ColumnForm(ModelForm):
                   'end_capping',
                   'silica')
 
+
 class LogPModelForm(ModelForm):
     class Meta:
         model = models.LogPModel
+        fields = ('column',
+                  'eluent',
+                  'gradient_of_eluent',
+                  'description',
+                  'gradient_time',
+                  'temperature',
+                  'flow_rate',
+                  'injected_volume',
+                  'k1',
+                  'k2',)
+
+class LserModelForm(ModelForm):
+    class Meta:
+        model = models.LSERModel
+        fields = ('column',
+                  'eluent',
+                  'gradient_of_eluent',
+                  'description',
+                  'gradient_time',
+                  'temperature',
+                  'flow_rate',
+                  'injected_volume',
+                  'k1',
+                  'k2',
+                  'k3',
+                  'k4')

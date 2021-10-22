@@ -1,0 +1,12 @@
+{% block title %}
+    Create new LSER Model
+{% endblock %}
+
+{% block body %}
+        <h1> Create new LSER Model</h1>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Add LSER Model">
+        </form>
+{% endblock %}

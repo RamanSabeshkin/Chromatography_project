@@ -19,6 +19,8 @@ urlpatterns = [
          name='detailed_lsermodel'),
     path('detailed_column/<int:y>/<int:m>/<int:d>/<slug:slug>/', views.detailed_column,
          name='detailed_column'),
+    path('create_logp_model/', views.create_logp_model, name='create_logpmodel'),
+    path('create_lser_model/', views.create_lser_model, name='create_lsermodel'),
     path('columns/', views.all_columns, name='all_columns'),
     path('create_column/', views.create_column, name='create_column'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
