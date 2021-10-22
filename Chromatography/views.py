@@ -10,14 +10,15 @@ from decimal import *
 from . import models
 from . import forms
 import pubchempy as pcp
-
+from django.utils.text import slugify
 
 
 def all_models(request):
     logpmodels = models.LogPModel.objects.all()
     lsermodels = models.LSERModel.objects.all()
     return render(request, "chromobjects/all_models.html",
-                  {'logpmodels': logpmodels, 'lsermodels':lsermodels})
+                  {'logpmodels': logpmodels, 'lsermodels': lsermodels})
+
 
 def all_logpmodels(request):
     logpmodels = models.LogPModel.objects.all()
@@ -119,3 +120,48 @@ def register(request):
     else:
         form = forms.UserRegistrationForm()
     return render(request, "registration/register.html", {'form': form})
+
+
+def all_columns(request):
+    columns = models.Column.objects.all()
+    return render(request, "columns_and_models/all_columns.html",
+                  {'columns': columns})
+
+
+@login_required
+def detailed_column(request, y, m, d, slug):
+    column = get_object_or_404(models.Column,
+                               publish__year=y,
+                               publish__month=m,
+                               publish__day=d,
+                               slug=slug)
+
+    return render(request,
+                  'columns_and_models/detailed_column.html',
+                  {'column': column})
+
+
+def myslug(self, *args, **kwargs):
+    self.slug = slugify(self.name + "-" + self.manufacturer)
+    return self.slug
+
+
+def create_column(request):
+    if request.method == "POST":
+        column_form = forms.ColumnForm(request.POST)
+        if column_form.is_valid():
+            new_column = column_form.save(commit=False)
+            new_column.author = User.objects.first()
+            new_column.slug = str(new_column.name.replace(" ", "-")) + "-" \
+                              + str(new_column.manufacturer.replace(" ", "-"))
+            new_column.save()
+
+            return render(request, "columns_and_models/detailed_column.html",
+                          {"column": new_column})
+
+    else:
+        column_form = forms.ColumnForm()
+
+    return render(request,
+                  'columns_and_models/create_column.html',
+                  {'form': column_form})

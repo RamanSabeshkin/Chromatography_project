@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 
 app_name = 'chromatography'
 urlpatterns = [
+
     path('', views.all_models, name='all_models'),
     path('logp/', views.all_logpmodels, name='all_logpmodels'),
     path('lser/', views.all_lsermodels, name='all_lsermodels'),
@@ -16,6 +17,10 @@ urlpatterns = [
          name='detailed_logpmodel'),
     path('detailed_lser/<int:y>/<int:m>/<int:d>/<slug:slug>/', views.detailed_lsermodel,
          name='detailed_lsermodel'),
+    path('detailed_column/<int:y>/<int:m>/<int:d>/<slug:slug>/', views.detailed_column,
+         name='detailed_column'),
+    path('columns/', views.all_columns, name='all_columns'),
+    path('create_column/', views.create_column, name='create_column'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.profile, name='profile'),

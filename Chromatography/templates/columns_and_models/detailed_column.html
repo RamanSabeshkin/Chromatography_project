@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+   All Columns
+{% endblock %}
+
+{% block body %}
+
+        <div>
+            <h3>{{ column.name }}</h3>
+            <p>
+                {{ column.type}}
+            </p>
+            <p>
+                {{ column.abbreviation}}
+            </p>
+            <p>
+                {{ column.manufacturer}}
+            </p>
+            <p>
+                {{ column.dimensions}}
+            </p>
+            <p>
+                {{ column.particle_size}}
+            </p>
+            <p>
+                {{ column.pore_size}}
+            </p>
+            <p>
+                {{ column.pore_volume}}
+            </p>
+            <p>
+                {{ column.surface_area}}
+            </p>
+            <p>
+                {{ column.carbon_loading}}
+            </p>
+            <p>
+                {{ column.surface_coverage}}
+            </p>
+            <p>
+                {{ column.carbon_loading}}
+            </p>
+            <p>
+                {{ column.bulk_density}}
+            </p>
+            <p>
+                {{ column.end_capping}}
+            </p>
+
+             <p>
+                {{ column.silica}}
+            </p>
+            <a href="{% url "chromatography:all_columns" %}"> Back to all Chromatographic columns </a>
+            <hr>
+        </div>
+
+{% endblock %}

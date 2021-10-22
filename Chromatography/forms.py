@@ -1,6 +1,8 @@
 from django import forms
 from . import models
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from Chromatography.models import Column
 
 
 class CompoundIDform(forms.Form):
@@ -33,4 +35,24 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password']
 
 
+class ColumnForm(ModelForm):
+    class Meta:
+        model = models.Column
+        fields = ('type',
+                  'name',
+                  'abbreviation',
+                  'manufacturer',
+                  'dimensions',
+                  'particle_size',
+                  'pore_size',
+                  'pore_volume',
+                  'surface_area',
+                  'carbon_loading',
+                  'surface_coverage',
+                  'bulk_density',
+                  'end_capping',
+                  'silica')
 
+class LogPModelForm(ModelForm):
+    class Meta:
+        model = models.LogPModel
