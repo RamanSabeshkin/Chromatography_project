@@ -120,7 +120,7 @@ def register(request):
             new_user = form.save(commit=False)
             new_user.set_password(cd['password'])
             new_user.save()
-            models.Profile.objects.create(user=new_user)
+            models.Profile.objects.create(user=new_user, photo='media/man.jpg')
             return render(request, "registration/registration_complete.html",
                           {"user": new_user})
 
@@ -236,6 +236,7 @@ def delete_logpmodel(request, id):
 
     return render(request, "columns_and_models/delete_logpmodel.html", {'logp_model': logp_model})
 
+
 def delete_lsermodel(request, id):
     lser_model = get_object_or_404(models.LSERModel,
                                    id=id)
@@ -249,9 +250,10 @@ def delete_lsermodel(request, id):
 
     return render(request, "columns_and_models/delete_lsermodel.html", {'lser_model': lser_model})
 
+
 def delete_column(request, id):
     column = get_object_or_404(models.Column,
-                                   id=id)
+                               id=id)
 
     if request.method == 'POST':
         if request.user == column.author:
@@ -264,6 +266,8 @@ def delete_column(request, id):
 
 
 def edit_profile(request):
+    if not request.user.profile:
+        models.Profile.objects.create(user=request.user, photo='media/man.jpg')
     if request.method == "POST":
         user_form = forms.UserEditForm(request.POST, instance=request.user)
         profile_form = forms.ProfileEditForm(request.POST,
@@ -274,12 +278,11 @@ def edit_profile(request):
             if not profile_form.cleaned_data['photo']:
                 profile_form.cleaned_data['photo'] = request.user.profile.photo
             profile_form.save()
-            return render(request, "profile.html", {'user': request.user})
+            return render(request, "registration/profile.html", {'user': request.user})
 
     else:
         user_form = forms.UserEditForm(instance=request.user)
         profile_form = forms.ProfileEditForm(request.POST, instance=request.user.profile)
 
-    return render(request, "edit_profile.html", {'user_form': user_form,
-                                                 'profile_form': profile_form})
-
+    return render(request, "registration/edit_profile.html", {'user_form': user_form,
+                                                              'profile_form': profile_form})

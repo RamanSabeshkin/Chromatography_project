@@ -129,12 +129,11 @@ class LSERModel(models.Model):
 
 
 class Profile(models.Model):
-    User = models.OneToOneField(settings.AUTH_USER_MODEL,
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
-    middle_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255)
-    birth = models.DateTimeField(blank=True, null=True)
+    birth = models.DateField(blank=True, null=True)
     position = models.CharField(max_length=255)
     photo = models.ImageField(upload_to="user/%Y/%m/%d", blank=True)
     updated = models.DateTimeField(auto_now=True)

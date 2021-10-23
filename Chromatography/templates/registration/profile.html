@@ -12,5 +12,8 @@
         <p>Birth: {{user.profile.birth}}</p>
         <p>Position: {{user.profile.position}}</p>
     </div>
-    <p> <img src="{{ user.profile.photo.url }}" alt="alt text", height="200px", width="200px"></p>
+    <p> <img src="{{ user.profile.photo.url }}" alt="alt text", height="100px", width="100px"></p>
+
+    <a href="{% url "chromatography:edit_profile" %}">edit profile </a>
+
 {% endblock %}

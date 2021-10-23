@@ -31,4 +31,4 @@ class LserModelAdmin(admin.ModelAdmin):
 
 @admin.register(models.Profile)
 class ProfileModelAdmin(admin.ModelAdmin):
-    list_display = ('User', 'first_name', 'last_name')
+    list_display = ('user', 'first_name', 'last_name')
