@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Column
+{% endblock %}
+
+{% block body %}
+        <h1> Delete Column</h1>
+        <form action="." method="post">
+        Are you sure that you want to delete {{column.name}}?
+            {% csrf_token %}
+            <input type="submit" value="Yes, delete!">
+            <a href="{% url "chromatography:all_columns" %}"> Back to all Columns </a>
+        </form>
+{% endblock %}

@@ -5,9 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <p>{{user.first_name}}</p>
-    <p>{{user.last_name}}</p>
-    <p>{{user.profile.birth}}</p>
-    <p>{{user.profile.position}}</p>
-    <p> <img src="{{ user.profile.photo.url }}" alt="alt text"></p>
+    <h3>Personal information</h3>
+    <div>
+        <p>First name: {{user.profile.first_name}}</p>
+        <p>Last name: {{user.profile.last_name}}</p>
+        <p>Birth: {{user.profile.birth}}</p>
+        <p>Position: {{user.profile.position}}</p>
+    </div>
+    <p> <img src="{{ user.profile.photo.url }}" alt="alt text", height="200px", width="200px"></p>
 {% endblock %}

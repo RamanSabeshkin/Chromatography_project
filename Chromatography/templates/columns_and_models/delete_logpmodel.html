@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete LogP Model
+{% endblock %}
+
+{% block body %}
+        <h1> Delete LogP Model</h1>
+        <form action="." method="post">
+        Are you sure that you want to delete {{logp_model.slug}}?
+            {% csrf_token %}
+            <input type="submit" value="Yes, delete!">
+            <a href="{% url "chromatography:all_logpmodels" %}"> Back to all LogP models </a>
+        </form>
+{% endblock %}
+

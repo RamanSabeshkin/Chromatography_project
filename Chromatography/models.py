@@ -87,6 +87,13 @@ class LogPModel(models.Model):
                              self.publish.day,
                              self.slug])
 
+    def get_absolute_url_delete(self):
+        return reverse('chromatography:delete_logpmodel',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
+
 
 class LSERModel(models.Model):
     column = models.ForeignKey(Column, to_field='name', on_delete=models.CASCADE)
@@ -122,7 +129,7 @@ class LSERModel(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+    User = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     middle_name = models.CharField(max_length=255, blank=True)

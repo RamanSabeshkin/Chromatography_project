@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-   {{logpmodel.slug}}
+   Detailed LogP Model
 {% endblock %}
 
 {% block body %}
@@ -15,6 +15,7 @@
     <p>Injected volume (µl): {{ logpmodel.injected_volume}}</p>
     <p>Coefficient k1: {{ logpmodel.k1}}</p>
     <p>Coefficient k2: {{ logpmodel.k2}}</p>
+    <p>Author: {{ logpmodel.author.username}}</p>
 
     <h3>Calculate retention time (min):</h3>
         <form action="." method="post">
@@ -23,6 +24,6 @@
             <input type="submit" value="Calculate!">
         </form>
 
-
+    <a href="/delete_logp_model/{{logpmodel.id}}"> Delete LogP model </a><br>
     <a href="{% url "chromatography:all_models" %}"> Back to all Chromatographic models </a>
 {% endblock %}

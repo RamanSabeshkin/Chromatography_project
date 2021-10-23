@@ -11,6 +11,7 @@ from . import models
 from . import forms
 import pubchempy as pcp
 from django.utils.text import slugify
+from django.shortcuts import HttpResponseRedirect
 
 
 def all_models(request):
@@ -185,8 +186,9 @@ def create_logp_model(request):
 
             new_logp_model.save()
 
-            return render(request, "chromobjects/detailed_logpmodel.html",
-                          {"logp_model": new_logp_model})
+            return HttpResponseRedirect('/logp')
+            """return render(request, "chromobjects/all_logpmodels.html",
+                          {"logp_model": new_logp_model})"""
 
     else:
         logp_model_form = forms.LogPModelForm()
@@ -208,8 +210,10 @@ def create_lser_model(request):
 
             new_lser_model.save()
 
-            return render(request, "chromobjects/detailed_lsermodel.html",
-                          {"logp_model": new_lser_model})
+            return HttpResponseRedirect('/logp')
+
+        """return render(request, "chromobjects/detailed_lsermodel.html",
+                      {"logp_model": new_lser_model})"""
 
     else:
         lser_model_form = forms.LserModelForm()
@@ -217,3 +221,65 @@ def create_lser_model(request):
     return render(request,
                   'columns_and_models/create_lsermodel.html',
                   {'form': lser_model_form})
+
+
+def delete_logpmodel(request, id):
+    logp_model = get_object_or_404(models.LogPModel,
+                                   id=id)
+
+    if request.method == 'POST':
+        if request.user == logp_model.author:
+            logp_model.delete()
+            return HttpResponseRedirect('/logp')
+        else:
+            return HttpResponse("You are not the author of this model and you cannot delete it!")
+
+    return render(request, "columns_and_models/delete_logpmodel.html", {'logp_model': logp_model})
+
+def delete_lsermodel(request, id):
+    lser_model = get_object_or_404(models.LSERModel,
+                                   id=id)
+
+    if request.method == 'POST':
+        if request.user == lser_model.author:
+            lser_model.delete()
+            return HttpResponseRedirect('/lser')
+        else:
+            return HttpResponse("You are not the author of this model and you cannot delete it!")
+
+    return render(request, "columns_and_models/delete_lsermodel.html", {'lser_model': lser_model})
+
+def delete_column(request, id):
+    column = get_object_or_404(models.Column,
+                                   id=id)
+
+    if request.method == 'POST':
+        if request.user == column.author:
+            column.delete()
+            return HttpResponseRedirect('/columns')
+        else:
+            return HttpResponse("You are not the author of this Column and you cannot delete it!")
+
+    return render(request, "columns_and_models/delete_column.html", {'column': column})
+
+
+def edit_profile(request):
+    if request.method == "POST":
+        user_form = forms.UserEditForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileEditForm(request.POST,
+                                             instance=request.user.profile,
+                                             files=request.FILES)
+        if all((user_form.is_valid(), profile_form.is_valid())):
+            user_form.save()
+            if not profile_form.cleaned_data['photo']:
+                profile_form.cleaned_data['photo'] = request.user.profile.photo
+            profile_form.save()
+            return render(request, "profile.html", {'user': request.user})
+
+    else:
+        user_form = forms.UserEditForm(instance=request.user)
+        profile_form = forms.ProfileEditForm(request.POST, instance=request.user.profile)
+
+    return render(request, "edit_profile.html", {'user_form': user_form,
+                                                 'profile_form': profile_form})
+

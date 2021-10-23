@@ -68,6 +68,7 @@ class LogPModelForm(ModelForm):
                   'k1',
                   'k2',)
 
+
 class LserModelForm(ModelForm):
     class Meta:
         model = models.LSERModel
@@ -83,3 +84,21 @@ class LserModelForm(ModelForm):
                   'k2',
                   'k3',
                   'k4')
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = models.Profile
+        fields = ('first_name', 'last_name', 'birth', 'position', 'photo')
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = models.Profile
+        fields = ('birth', 'photo')

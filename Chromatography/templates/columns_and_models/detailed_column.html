@@ -2,7 +2,7 @@
 
 
 {% block title %}
-   All Columns
+   Detailed Column
 {% endblock %}
 
 {% block body %}
@@ -10,50 +10,50 @@
         <div>
             <h3>{{ column.name }}</h3>
             <p>
-                {{ column.type}}
+                Type: {{ column.type}}
             </p>
             <p>
-                {{ column.abbreviation}}
+               Abbreviation: {{ column.abbreviation}}
             </p>
             <p>
-                {{ column.manufacturer}}
+                Manufacturer: {{ column.manufacturer}}
             </p>
             <p>
-                {{ column.dimensions}}
+                Dimensions, L×i.d.(mm×mm): {{ column.dimensions}}
             </p>
             <p>
-                {{ column.particle_size}}
+                Particle size (µm): {{ column.particle_size}}
             </p>
             <p>
-                {{ column.pore_size}}
+                Pore size (C): {{ column.pore_size}}
             </p>
             <p>
-                {{ column.pore_volume}}
+                Pore volume (ml/g): {{ column.pore_volume}}
             </p>
             <p>
-                {{ column.surface_area}}
+                Surface area (m^2/g): {{ column.surface_area}}
             </p>
             <p>
-                {{ column.carbon_loading}}
+                Carbon loading(%): {{ column.carbon_loading}}
             </p>
             <p>
-                {{ column.surface_coverage}}
+                Surface coverage (µmol/m^2): {{ column.surface_coverage}}
             </p>
             <p>
-                {{ column.carbon_loading}}
+                Carbon loading(%): {{ column.carbon_loading}}
             </p>
             <p>
-                {{ column.bulk_density}}
+                Bulk density (g/ml): {{ column.bulk_density}}
             </p>
             <p>
-                {{ column.end_capping}}
+                End capping: {{ column.end_capping}}
             </p>
 
              <p>
-                {{ column.silica}}
+                Silica: {{ column.silica}}
             </p>
+            <a href="/delete_column/{{column.id}}"> Delete Column </a><br>
             <a href="{% url "chromatography:all_columns" %}"> Back to all Chromatographic columns </a>
-            <hr>
         </div>
 
 {% endblock %}

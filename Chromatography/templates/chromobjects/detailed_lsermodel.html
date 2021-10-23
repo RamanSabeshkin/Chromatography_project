@@ -17,6 +17,7 @@
     <p>Coefficient k2: {{ lsermodel.k2}}</p>
     <p>Coefficient k3: {{ lsermodel.k3}}</p>
     <p>Coefficient k4: {{ lsermodel.k4}}</p>
+     <p>Author: {{ lsermodel.author}}</p>
 
     <h3>Calculate retention time (min):</h3>
         <form action="." method="post">
@@ -25,6 +26,6 @@
             <input type="submit" value="Calculate!">
         </form>
 
-
+     <a href="/delete_lser_model/{{lsermodel.id}}"> Delete LSER model </a><br>
     <a href="{% url "chromatography:all_models" %}"> Back to all Chromatographic models </a>
 {% endblock %}
