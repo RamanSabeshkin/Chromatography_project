@@ -5,21 +5,19 @@
 {% endblock %}
 
 {% block body %}
-    <h3>All LSER Chromatographic models</h3>
-    {% for lsermodel in lsermodels %}
-        <h3>{{ lsermodel.slug }}</h3>
-        <p>
-            {{ lsermodel.column}}
-        </p>
-        <p>
-            {{ lsermodel.eluent}}
-        </p>
-         <p>
-            tg (gradient time) = {{ lserpmodel.gradient_time}} min
-        </p>
-
-        <a href="{{ lsermodel.get_absolute_url }}">go to Chromatographic model </a><br>
-        <hr>
-    {% endfor %}
-    <a href="{% url "chromatography:create_lsermodel" %}"> Create new LSER Model </a>
+   <div class="row" style="margin: 5px">
+        {% for lsermodel in lsermodels %}
+      <div class="col-sm">
+        <div class="card text-white bg-secondary mb-3" style="min-width: 18rem; background-color: #e3f2fd;">
+           <div class="card-body">
+                <h5 class="card-title" style="color: lightcyan">{{ lsermodel.slug }}</h5>
+                <p class="card-text"> Column: {{ lsermodel.column}}</p>
+                <p class="card-text"> Eluent: {{ lsermodel.eluent}}</p>
+                <p class="card-text"> Tg(min): {{ lsermodel.gradient_time}}</p>
+                <a href="{{ lsermodel.get_absolute_url }}" class="btn btn-light">go to Chromatographic model</a>
+           </div>
+         </div>
+      </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -4,25 +4,22 @@
     LogP Chromatographic Models
 {% endblock %}
 
+
 {% block body %}
-
-    <h3>All LogP Chromatographic models</h3>
-
-    {% for logpmodel in logpmodels %}
-        <h3>{{ logpmodel.slug }}</h3>
-        <p>
-            {{ logpmodel.column}}
-        </p>
-        <p>
-            {{ logpmodel.eluent}}
-        </p>
-         <p>
-            tg (gradient time) = {{ logpmodel.gradient_time}} min
-        </p>
-
-        <a href="{{ logpmodel.get_absolute_url }}">go to Chromatographic model </a><br>
-        <hr>
-    {% endfor %}
-     <a href="{% url "chromatography:create_logpmodel" %}"> Create new LogP Model </a>
+   <div class="row" style="margin: 5px">
+        {% for logpmodel in logpmodels %}
+      <div class="col-sm">
+        <div class="card text-white bg-secondary mb-3" style="width: 20rem ; background-color: #e3f2fd;">
+           <div class="card-body">
+                <h5 class="card-title" style="color: lightcyan">{{ lsermodel.slug }}</h5>
+                <p class="card-text"> Column: {{ logpmodel.column}}</p>
+                <p class="card-text"> Eluent: {{ logpmodel.eluent}}</p>
+                <p class="card-text"> Tg(min): {{ logpmodel.gradient_time}}</p>
+                <a href="{{ logpmodel.get_absolute_url }}" class="btn btn-light">go to Chromatographic model</a>
+           </div>
+         </div>
+      </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 

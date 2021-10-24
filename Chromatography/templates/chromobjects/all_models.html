@@ -10,41 +10,39 @@
     <h3>All LogP Chromatographic models</h3>
 
     {% for logpmodel in logpmodels %}
-        <div>
-            <h3>{{ logpmodel.slug }}</h3>
-            <p>
-                {{ logpmodel.column}}
-            </p>
-            <p>
-                {{ logpmodel.eluent}}
-            </p>
-             <p>
-                tg (gradient time) = {{ logpmodel.gradient_time}} min
-            </p>
-
-            <a href="{{ logpmodel.get_absolute_url }}">go to Chromatographic model </a><br>
-            <hr>
-        </div>
+      <div class="card-deck">
+        <div class="card" style="width: 25rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ logpmodel.slug }}</h5>
+                <p class="card-text"> Column: {{ logpmodel.column}}</p>
+                <p class="card-text"> Eluent: {{ logpmodel.eluent}}</p>
+                <p class="card-text"> Tg(min): {{ logpmodel.gradient_time}}</p>
+                <a href="{{ logpmodel.get_absolute_url }}" class="btn btn-primary">go to Chromatographic model</a>
+              </div>
+            </div>
+      </div>
     {% endfor %}
 
     <h3>All LSER Chromatographic models</h3>
-    {% for lsermodel in lsermodels %}
-        <div>
-            <h3>{{ lsermodel.slug }}</h3>
-            <p>
-                {{ lsermodel.column}}
-            </p>
-            <p>
-                {{ lsermodel.eluent}}
-            </p>
-             <p>
-                tg (gradient time) = {{ lsermodel.gradient_time}} min
-            </p>
 
-            <a href="{{ lsermodel.get_absolute_url }}">go to Chromatographic model </a><br>
-        </div>
-        <hr>
+    {% for lsermodel in lsermodels %}
+
+        <div class="card-deck">
+            <div class="card" style="width: 25rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ lsermodel.slug }}</h5>
+                <p class="card-text">Column: {{ lsermodel.column}}</p>
+                <p class="card-text">Eluent: {{ lsermodel.eluent}}</p>
+                <p class="card-text">Tg(min): {{ lsermodel.gradient_time}}</p>
+                <a href="{{ lsermodel.get_absolute_url }}" class="btn btn-primary">go to Chromatographic model</a>
+              </div>
+            </div>
+         </div>
+
     {% endfor %}
 {% endblock %}
+
+
+
 
 

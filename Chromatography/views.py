@@ -153,7 +153,7 @@ def myslug(self, *args, **kwargs):
     self.slug = slugify(self.name + "-" + self.manufacturer)
     return self.slug
 
-
+@login_required
 def create_column(request):
     if request.method == "POST":
         column_form = forms.ColumnForm(request.POST)
@@ -172,7 +172,7 @@ def create_column(request):
                   'columns_and_models/create_column.html',
                   {'form': column_form})
 
-
+@login_required
 def create_logp_model(request):
     if request.method == "POST":
         logp_model_form = forms.LogPModelForm(request.POST)
@@ -196,7 +196,7 @@ def create_logp_model(request):
                   'columns_and_models/create_logpmodel.html',
                   {'form': logp_model_form})
 
-
+@login_required
 def create_lser_model(request):
     if request.method == "POST":
         lser_model_form = forms.LserModelForm(request.POST)
@@ -204,7 +204,7 @@ def create_lser_model(request):
             new_lser_model = lser_model_form.save(commit=False)
             new_lser_model.author = User.objects.first()
             new_lser_model.slug = str(new_lser_model.column.name.replace(" ", "-")) + "-" \
-                                  + str(new_lser_model.eluent.replace(" ", "-")) \
+                                  + str(new_lser_model.eluent.replace(" ", "-")) + "-" \
                                   + str(new_lser_model.gradient_time)
 
             new_lser_model.save()

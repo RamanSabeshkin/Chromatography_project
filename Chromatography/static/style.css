@@ -1,3 +1,16 @@
+.bg {
+    color: #444499;
+    font-family: "Segoe UI", Arial, Verdana, sans-serif;
+    font-size: .9em;
+    background-image: url("../../media/chemist-g477d7ed2a_1920.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+
 h3 {
     color: cadetblue;
 }
+
