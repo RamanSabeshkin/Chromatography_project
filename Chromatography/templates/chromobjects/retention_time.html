@@ -11,6 +11,16 @@
 {% block body %}
 
     <p>Calculated retention time for {{iupac_name}} ([{{ molecular_formula }}]): {{retention_time}}</p><br>
+
+    {%block scripts%}
+
+{%endblock scripts%}
+
+{%block content%}
+
+{%endblock content%}
+
+
     <a href={{logpmodel.get_absolute_url}}> Back to model></a>
 
 {% endblock %}

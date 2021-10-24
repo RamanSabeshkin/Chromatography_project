@@ -13,13 +13,10 @@
     {% for column in columns %}
         <h3>{{ column.name }}</h3>
         <p>
-            {{ column.abbreviation}}
-        </p>
-        <p>
-            {{ column.type}}
+           Type: {{ column.type}}
         </p>
          <p>
-            {{ column.manufaturer}}
+            Manufacturer: {{ column.manufacturer}}
         </p>
         <a href="{{ column.get_absolute_url }}">go to Chromatographic Column </a><br>
         <hr>

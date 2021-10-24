@@ -56,7 +56,6 @@ class Column(models.Model):
                              self.slug])
 
 
-
 class LogPModel(models.Model):
     column = models.ForeignKey(Column, to_field='name', on_delete=models.CASCADE)
     eluent = models.CharField(max_length=255, verbose_name="Eluent (Solvent1 Solvent2)")
@@ -130,7 +129,7 @@ class LSERModel(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
+                      on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     birth = models.DateField(blank=True, null=True)
@@ -141,5 +140,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.first_name
-
-

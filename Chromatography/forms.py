@@ -95,6 +95,6 @@ class ProfileEditForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('email',)
 
 

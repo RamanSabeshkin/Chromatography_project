@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -159,13 +160,11 @@ def create_column(request):
         if column_form.is_valid():
             new_column = column_form.save(commit=False)
             new_column.author = User.objects.first()
-            new_column.slug = str(new_column.name.replace(" ", "-")) + "-" \
-                              + str(new_column.manufacturer.replace(" ", "-"))
+            new_column.slug = new_column.name.replace(" ", "-")
             new_column.save()
-
-            return render(request, "columns_and_models/detailed_column.html",
-                          {"column": new_column})
-
+            return HttpResponseRedirect('/columns')
+            """return render(request, 'columns_and_models/detailed_column.html',
+                          {'column': new_column})"""
     else:
         column_form = forms.ColumnForm()
 
@@ -181,7 +180,7 @@ def create_logp_model(request):
             new_logp_model = logp_model_form.save(commit=False)
             new_logp_model.author = User.objects.first()
             new_logp_model.slug = str(new_logp_model.column.name.replace(" ", "-")) + "-" \
-                                  + str(new_logp_model.eluent.replace(" ", "-")) \
+                                  + str(new_logp_model.eluent.replace(" ", "-")) + "-" \
                                   + str(new_logp_model.gradient_time)
 
             new_logp_model.save()
@@ -210,7 +209,7 @@ def create_lser_model(request):
 
             new_lser_model.save()
 
-            return HttpResponseRedirect('/logp')
+            return HttpResponseRedirect('/lser')
 
         """return render(request, "chromobjects/detailed_lsermodel.html",
                       {"logp_model": new_lser_model})"""
@@ -266,13 +265,15 @@ def delete_column(request, id):
 
 
 def edit_profile(request):
-    if not request.user.profile:
+    try:
+        request.user.profile
+    except ObjectDoesNotExist:
         models.Profile.objects.create(user=request.user, photo='media/man.jpg')
     if request.method == "POST":
         user_form = forms.UserEditForm(request.POST, instance=request.user)
         profile_form = forms.ProfileEditForm(request.POST,
                                              instance=request.user.profile,
-                                             files=request.FILES)
+                                             files=request.FILES, )
         if all((user_form.is_valid(), profile_form.is_valid())):
             user_form.save()
             if not profile_form.cleaned_data['photo']:
