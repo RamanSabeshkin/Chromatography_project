@@ -227,7 +227,7 @@ def delete_logpmodel(request, id):
                                    id=id)
 
     if request.method == 'POST':
-        if request.user == logp_model.author:
+        if request.user.username == logp_model.author:
             logp_model.delete()
             return HttpResponseRedirect('/logp')
         else:

@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <h3>Personal information</h3>
-    <div>
-        <p>First name: {{user.profile.first_name}}</p>
-        <p>Last name: {{user.profile.last_name}}</p>
-        <p>Birth: {{user.profile.birth}}</p>
-        <p>Position: {{user.profile.position}}</p>
-    </div>
-    <p> <img src="{{ user.profile.photo.url }}" alt="alt text", height="100px", width="100px"></p>
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding-left: 10px">
+        <h3>Personal information</h3>
+        <div>
+            <p>First name: {{user.profile.first_name}}</p>
+            <p>Last name: {{user.profile.last_name}}</p>
+            <p>Birth: {{user.profile.birth}}</p>
+            <p>Position: {{user.profile.position}}</p>
+        </div>
+        <p> <img src="{{ user.profile.photo.url }}" alt="alt text", height="100px", width="100px"></p>
 
-    <a href="{% url "chromatography:edit_profile" %}">edit profile </a>
+        <a href="{% url "chromatography:edit_profile" %}">edit profile </a>
+    </div>
 
 {% endblock %}

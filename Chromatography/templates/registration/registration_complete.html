@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Hi {{ user.username }} !</h1>
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding-left: 10px">
+            <h1>Hi {{ user.username }} !</h1>
 
-    You've been registered. Now you can login
-    <a href="{% url "chromatography:login" %}">login </a><br>
+            You've been registered. Now you can login
+            <a href="{% url "chromatography:login" %}">login </a><br>
 
-<a href="{% url "chromatography:all_models" %}"> Back to all Models </a>
+            <a href="{% url "chromatography:all_models" %}"> Back to all Models </a>
+    </div>
 {% endblock %}
