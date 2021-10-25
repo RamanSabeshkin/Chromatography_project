@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding-left: 10px">
     <h3>LogP model</h3>
     <p>Chromatographic column: {{ logpmodel.column}}</p>
     <p>Eluent: {{ logpmodel.eluent}}</p>
@@ -26,4 +27,5 @@
 
     <a href="/delete_logp_model/{{logpmodel.id}}"> Delete LogP model </a><br>
     <a href="{% url "chromatography:all_models" %}"> Back to all Chromatographic models </a>
+</div>
 {% endblock %}

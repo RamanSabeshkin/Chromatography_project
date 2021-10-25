@@ -10,9 +10,9 @@
    <div class="row" style="margin: 5px">
         {% for column in columns %}
           <div class="col-sm">
-            <div class="card border-info mb-3 text-primary" style="min-width: 20rem">
+            <div class="card border-info mb-3 text-info" style="min-width: 20rem">
                <div class="card-body">
-                    <p class="card-text"> Name: {{ column.name}}</p>
+                    <h5 class="card-title ">Name: {{ column.name}}</h5>
                     <p class="card-text"> Type: {{ column.type}}</p>
                     <p class="card-text"> Manufacturer: {{ column.manufacturer}}</p>
                     <a href="{{ column.get_absolute_url }}" class="btn btn-light">go to Chromatographic Column</a>

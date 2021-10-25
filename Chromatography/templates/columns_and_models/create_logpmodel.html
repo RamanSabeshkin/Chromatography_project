@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block body %}
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding-left: 10px">
         <h1> Create new LogP Model</h1>
         <form action="." method="post">
             {{ form.as_p }}
             {% csrf_token %}
             <input type="submit" value="Add logP Model">
         </form>
+    </div>
 {% endblock %}

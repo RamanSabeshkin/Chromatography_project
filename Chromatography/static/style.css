@@ -7,10 +7,15 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center top;
+    min-height: 100vh;
 }
 
 
 h3 {
     color: cadetblue;
+}
+
+h2 {
+    color: azure;
 }
 

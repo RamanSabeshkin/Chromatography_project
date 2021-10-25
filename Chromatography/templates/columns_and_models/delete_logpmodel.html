@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding-left: 10px">
         <h1> Delete LogP Model</h1>
         <form action="." method="post">
         Are you sure that you want to delete {{logp_model.slug}}?
@@ -12,5 +13,6 @@
             <input type="submit" value="Yes, delete!">
             <a href="{% url "chromatography:all_logpmodels" %}"> Back to all LogP models </a>
         </form>
+    </div>
 {% endblock %}
 

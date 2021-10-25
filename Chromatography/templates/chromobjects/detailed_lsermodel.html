@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <div style="background-color: rgba(255, 255, 255, 0.8); padding-left: 10px">
     <h3>LSER Model</h3>
     <p>Chromatographic column: {{ lsermodel.column}}</p>
     <p>Eluent: {{ lsermodel.eluent}}</p>
@@ -28,4 +29,5 @@
 
      <a href="/delete_lser_model/{{lsermodel.id}}"> Delete LSER model </a><br>
     <a href="{% url "chromatography:all_models" %}"> Back to all Chromatographic models </a>
+    <div>
 {% endblock %}
