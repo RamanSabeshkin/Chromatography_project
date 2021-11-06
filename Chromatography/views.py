@@ -202,7 +202,7 @@ def create_lser_model(request):
         lser_model_form = forms.LserModelForm(request.POST)
         if lser_model_form.is_valid():
             new_lser_model = lser_model_form.save(commit=False)
-            new_lser_model.author = User.objects.first()
+            new_lser_model.author = User.objects.get(username=request.user.username)
             new_lser_model.slug = str(new_lser_model.column.name.replace(" ", "-")) + "-" \
                                   + str(new_lser_model.eluent.replace(" ", "-")) + "-" \
                                   + str(new_lser_model.gradient_time)
@@ -277,7 +277,7 @@ def edit_profile(request):
         if all((user_form.is_valid(), profile_form.is_valid())):
             user_form.save()
             if not profile_form.cleaned_data['photo']:
-                profile_form.cleaned_data['photo'] = request.user.profile.photo
+                profile_form.cleaned_datсa['photo'] = request.user.profile.photo
             profile_form.save()
             return render(request, "registration/profile.html", {'user': request.user})
 
