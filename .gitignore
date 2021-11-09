@@ -120,4 +120,5 @@ dmypy.json
 
 /media/
 /Chromatography_web/
+.DS_Store
 
